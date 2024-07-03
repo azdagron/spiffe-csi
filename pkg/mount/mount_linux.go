@@ -19,11 +19,11 @@ var (
 )
 
 func bindMountRW(root, mountPoint string) error {
-	return unix.Mount(root, mountPoint, "none", unix.MS_BIND|unix.MS_REC, "")
+	return unix.Mount(root, mountPoint, "none", unix.MS_BIND|unix.MS_REC|unix.MS_SLAVE, "")
 }
 
 func unmount(mountPoint string) error {
-	return unix.Unmount(mountPoint, unix.MNT_FORCE)
+	return unix.Unmount(mountPoint, unix.MNT_DETACH)
 }
 
 func isMountPoint(mountPoint string) (bool, error) {
