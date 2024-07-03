@@ -9,4 +9,6 @@ const (
 	VolumeID             = "volumeID"
 	VolumePath           = "volumePath"
 	WorkloadAPISocketDir = "workloadAPISocketDir"
+	Name                 = "name"
+	IsDir                = "isDir"
 )

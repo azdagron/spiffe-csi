@@ -163,6 +163,7 @@ func (d *Driver) NodeUnpublishVolume(_ context.Context, req *csi.NodeUnpublishVo
 	if ok, err := isMountPoint(req.TargetPath); err != nil {
 		return nil, status.Errorf(codes.Internal, "unable to verify mount point %q: %v", req.TargetPath, err)
 	} else if ok {
+
 		if err := unmount(req.TargetPath); err != nil {
 			return nil, status.Errorf(codes.Internal, "unable to unmount %q: %v", req.TargetPath, err)
 		}

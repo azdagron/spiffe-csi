@@ -11,11 +11,6 @@ import (
 	"golang.org/x/sys/unix"
 )
 
-const (
-	msBind uintptr = 4096  // LINUX MS_BIND
-	msRec  uintptr = 16384 // LINUX MS_REC
-)
-
 var (
 	// procMountInfo is the path the mount information presented by the proc
 	// filesystem for the current process. It is overridden in unit tests to
@@ -24,11 +19,11 @@ var (
 )
 
 func bindMountRW(root, mountPoint string) error {
-	return unix.Mount(root, mountPoint, "none", msBind|msRec, "")
+	return unix.Mount(root, mountPoint, "none", unix.MS_BIND|unix.MS_REC, "")
 }
 
 func unmount(mountPoint string) error {
-	return unix.Unmount(mountPoint, 0)
+	return unix.Unmount(mountPoint, unix.MNT_FORCE)
 }
 
 func isMountPoint(mountPoint string) (bool, error) {
