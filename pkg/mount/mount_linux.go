@@ -12,7 +12,8 @@ import (
 )
 
 const (
-	msBind uintptr = 4096 // LINUX MS_BIND
+	msBind uintptr = 4096  // LINUX MS_BIND
+	msRec  uintptr = 16384 // LINUX MS_REC
 )
 
 var (
@@ -23,7 +24,7 @@ var (
 )
 
 func bindMountRW(root, mountPoint string) error {
-	return unix.Mount(root, mountPoint, "none", msBind, "")
+	return unix.Mount(root, mountPoint, "none", msBind|msRec, "")
 }
 
 func unmount(mountPoint string) error {
